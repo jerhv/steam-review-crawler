@@ -5,9 +5,9 @@ A Python script for crawling for reviews of a given Steam application and export
 ### Instructions:
 Install python packages with pip using requirements.txt (in commandline, pip3 install -r requirements.txt)
 
-Crawler script can then be run using Python 3. (in commandline, python3 crawler.py)
+Crawler script can then be run using Python. The code has been written and tested in Python 3 only. (in commandline, python crawler.py)
 
-The script will require a Steam AppID as a parameter. (e.g. python3 crawler.py 1382330)
+The script will require a Steam AppID as a parameter. (e.g. python crawler.py 1382330)
 
 Optional date filters can be added with the "--filter_from" and "--filter_to flags", in the YYYY-MM-DD format (e.g. python crawler.py 1382330 --filter_from="2021-02-02")
 
