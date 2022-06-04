@@ -1,0 +1,35 @@
+........
+----------------------------------------------------------------------
+Ran 8 tests in 21.023s
+
+OK
+Testing if the reviews are can be filtered correctly by date...
+328 reviews for Half-Life 2 retrieved successfully.
+All reviews are within filter parameters!
+
+Crawler can successfully retrieve reviews from WebAPI!
+
+Testing if the same author will generate the same UUID...
+Review 1:    Content: amazing game 10/10 very well made and would recommend even in the years to come. A masterpiece., Author: 76561198447184425, ID: 6f8007b9-fa63-3284-9a4a-319fa9df8de1
+Review 2:    Content: the game ever, Author: 76561198447184425, ID: 6f8007b9-fa63-3284-9a4a-319fa9df8de1
+Crawler can successfully generate the same UUID for the same author, even with different review content!
+
+Testing if two of the same review will generate different IDs...
+Review 1:    Content: the game ever, ID: 2560227915
+Review 2:    Content: the game ever, ID: 2560227915
+Crawler can successfully generate the same ID for duplicate reviews!
+
+Testing if the scraper can get the right franchise name...
+Scraper can retrieve the correct franchise name for given ID!
+
+Testing if the scraper can get the right app name...
+Scraper can retrieve the correct app name for given ID!
+
+Testing if the reviews are sorted secondarily by id...
+1295 reviews for Half-Life 2 retrieved successfully.
+Multiple reviews for given dates are sorted in list by ID!
+
+Testing if the reviews are sorted correctly by date...
+1295 reviews for Half-Life 2 retrieved successfully.
+All dates in reviews list are in order!
+

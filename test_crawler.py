@@ -61,7 +61,7 @@ class TestReviewCrawler(TestCase):
         print("Scraper can retrieve the correct franchise name for given ID!\n")
 
     def test_filter(self):
-        print("Testing if the reviews are can be filtered correctly by date...")
+        print("Testing if the reviews can be filtered correctly by date...")
         def __gen_random_date(start_date, end_date):
             r_days = random.randrange((end_date - start_date).days)
             return start_date + timedelta(days=r_days)
