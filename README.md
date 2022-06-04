@@ -1,8 +1,8 @@
-##crawler.py
+## crawler.py
 
 A Python script for crawling for reviews of a given Steam application and exporting salient information to a JSON file.
 
-###Instructions:
+### Instructions:
 Install python packages with pip using requirements.txt (in commandline, pip3 install -r requirements.txt)
 
 Crawler script can then be run using Python 3. (in commandline, python3 crawler.py)
