@@ -15,4 +15,4 @@ The optional flag "--no-json" will make the script not save the list of reviews 
 
 All of this information is also available using the "-h" or "--help" flags.
 
-The unit tests can also be run with the commandline - python3 -m unittest test_crawler.py
+The unit tests can also be run with the commandline - python -m unittest test_crawler.py
