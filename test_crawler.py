@@ -1,10 +1,9 @@
 from unittest import TestCase
 from crawl_utils import Crawler, Scraper
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 from itertools import groupby
 
-# filter test?
 
 class TestReviewCrawler(TestCase):
 
@@ -17,7 +16,7 @@ class TestReviewCrawler(TestCase):
         print("Testing if two of the same review will generate different IDs...")
         c = Crawler()
         reviews = c.retrieve_reviews_json()['reviews']
-        randval = random.randint(0, len(reviews)-1)
+        randval = random.randint(0, len(reviews) - 1)
         rev_copy1 = c.conform_review(reviews[randval])
         print(f"Review 1:    Content: {rev_copy1['content']}, ID: {rev_copy1['id']}")
         rev_copy2 = c.conform_review(reviews[randval])
@@ -40,7 +39,8 @@ class TestReviewCrawler(TestCase):
         print(f"Review 2:    "
               f"Content: {rev_copy2['content']}, Author: {rev2['author']['steamid']}, ID: {rev_copy2['author']}")
         self.assertEqual(rev_copy1['author'], rev_copy2['author'])
-        print("Crawler can successfully generate the same UUID for the same author, even with different review content!\n")
+        print(
+            "Crawler can successfully generate the same UUID for the same author, even with different review content!\n")
 
     def test_scrape_name(self):
         print("Testing if the scraper can get the right app name...")
@@ -60,7 +60,36 @@ class TestReviewCrawler(TestCase):
         self.assertEqual(s.retrieve_franchise(), real_franchise)
         print("Scraper can retrieve the correct franchise name for given ID!\n")
 
-    #def test_filter(self):
+    def test_filter(self):
+        print("Testing if the reviews are can be filtered correctly by date...")
+        def __gen_random_date(start_date, end_date):
+            r_days = random.randrange((end_date - start_date).days)
+            return start_date + timedelta(days=r_days)
+
+        def __conv(dat):
+            return datetime.strftime(dat, '%Y-%m-%d')
+
+        def __conv_back(dat):
+            return datetime.strptime(dat, '%Y-%m-%d')
+
+        r_start = __gen_random_date((datetime.now() - timedelta(days=365)), datetime.now())
+        r_end = __gen_random_date(r_start, datetime.now())
+
+        r_start = __conv(r_start)
+        r_end = __conv(r_end)
+
+        c = Crawler().crawl_reviews(filter_from=r_start, filter_to=r_end, json=False)
+
+        check = False
+        for n in c:
+            if __conv_back(r_start) <= __conv_back(n['date']) <= __conv_back(r_end):
+                check = True
+            else:
+                check = False
+                break
+        self.assertTrue(check)
+        print("All reviews are within filter parameters!\n")
+
         # generate random date for from filter - some day between today and last year
         # generate random date for to filter - some day between today and from filter
         # run crawler, check output
@@ -100,6 +129,6 @@ class TestReviewCrawler(TestCase):
                     id_base = int(x['id'])
                 else:
                     id_check = False
+                    break
         self.assertTrue(id_check)
         print("Multiple reviews for given dates are sorted in list by ID!\n")
-
